@@ -78,9 +78,7 @@ export default function ReportPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-3">Report Not Found</h2>
           <p className="text-gray-600 mb-8">{error || 'This report could not be loaded.'}</p>
           <ChromaButton
-            href="/analyze"
-            borderColor="#3b82f6"
-            gradient="linear-gradient(145deg, #3b82f6, #000)"
+            href="/"
             className="px-6 py-3 shadow-lg"
           >
             Analyze Another Resume
@@ -140,7 +138,7 @@ export default function ReportPage() {
               </div>
             </Link>
             <Link
-              href="/analyze"
+              href="/"
               className="text-gray-700 hover:text-indigo-600 font-medium transition-all duration-200"
             >
               Analyze Another
@@ -349,17 +347,15 @@ export default function ReportPage() {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4">
           <ChromaButton
-            href="/analyze"
-            borderColor="#3b82f6"
-            gradient="linear-gradient(145deg, #3b82f6, #000)"
+            href="/"
             className="flex-1 px-8 py-4 text-lg shadow-xl hover:shadow-2xl"
           >
             Analyze Another Resume
           </ChromaButton>
           <ChromaButton
             onClick={() => window.print()}
-            borderColor="#06b6d4"
-            gradient="linear-gradient(145deg, #06b6d4, #000)"
+            borderColor="#475569"
+            gradient="#64748b"
             className="flex-1 px-8 py-4 text-lg shadow-lg hover:shadow-xl"
           >
             Print Report

@@ -1,15 +1,20 @@
 .chroma-button {
-  border: none;
+  border: 1px solid var(--card-border, rgba(30, 64, 175, 0.55));
   overflow: hidden;
   position: relative;
   border-radius: 1rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
 }
 
 .chroma-button::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--spotlight-color), transparent 70%);
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    var(--spotlight-color),
+    transparent 65%
+  );
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -20,8 +25,11 @@
   opacity: 1;
 }
 
+.chroma-button:not(:disabled):not(.opacity-50):hover {
+  filter: brightness(1.04);
+}
+
 .chroma-button > * {
   position: relative;
   z-index: 2;
 }
-

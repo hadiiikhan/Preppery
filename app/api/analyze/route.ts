@@ -7,14 +7,16 @@ import { headers } from 'next/headers';
 
 export async function POST(request: NextRequest) {
   try {
-    // Validate environment variables
-    const openaiKey = process.env.OPENAI_API_KEY?.trim();
-    if (!openaiKey) {
-      console.error('OPENAI_API_KEY is not set. Available env vars:', Object.keys(process.env).filter(k => k.includes('OPENAI')));
+    const anthropicKey = process.env.ANTHROPIC_API_KEY?.trim();
+    if (!anthropicKey) {
+      console.error(
+        "ANTHROPIC_API_KEY is not set. Analysis uses Claude (same key as tailored resume)."
+      );
       return NextResponse.json(
         {
-          error: 'Server configuration error',
-          message: 'OpenAI API key is not configured. Please add OPENAI_API_KEY to your .env.local file and restart the server.',
+          error: "Server configuration error",
+          message:
+            "Anthropic API key is not configured. Add ANTHROPIC_API_KEY to .env.local and restart the server.",
         },
         { status: 500 }
       );
@@ -101,12 +103,11 @@ export async function POST(request: NextRequest) {
     const forwarded = headersList.get('x-forwarded-for');
     const anonymousId = forwarded ? forwarded.split(',')[0] : headersList.get('x-real-ip') || null;
 
-    // Analyze resume against job description using OpenAI
     let reportData;
     try {
       reportData = await analyzeResume(resumeText, jobDescription);
     } catch (error) {
-      console.error('OpenAI analysis error:', error);
+      console.error("Claude analysis error:", error);
       return NextResponse.json(
         {
           error: 'Analysis failed',

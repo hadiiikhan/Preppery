@@ -8,7 +8,9 @@ interface ChromaButtonProps {
   children: ReactNode;
   href?: string;
   onClick?: () => void;
+  /** Border color (matches app blue/slate accents) */
   borderColor?: string;
+  /** Button fill: solid hex or any valid CSS background (default plain primary blue) */
   gradient?: string;
   className?: string;
   disabled?: boolean;
@@ -20,8 +22,8 @@ export default function ChromaButton({
   children,
   href,
   onClick,
-  borderColor = '#3b82f6',
-  gradient = 'linear-gradient(145deg, #3b82f6, #000)',
+  borderColor = '#1e40af',
+  gradient = '#2563eb',
   className = '',
   disabled = false,
   type = 'button',
@@ -36,7 +38,7 @@ export default function ChromaButton({
     card.style.setProperty('--mouse-y', `${y}px`);
   };
 
-  const baseClasses = `chroma-button relative inline-flex items-center justify-center px-6 py-3 font-semibold text-white transition-all ${disabled ? '' : 'transform hover:scale-105'} ${className}`;
+  const baseClasses = `chroma-button relative inline-flex items-center justify-center px-6 py-3 font-semibold text-white transition-all ${className}`;
   const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
 
   const style = {
@@ -44,7 +46,7 @@ export default function ChromaButton({
     '--card-gradient': gradient,
     '--mouse-x': '50%',
     '--mouse-y': '50%',
-    '--spotlight-color': 'rgba(255, 255, 255, 0.3)',
+    '--spotlight-color': 'rgba(255, 255, 255, 0.28)',
     background: gradient,
     cursor: disabled ? 'not-allowed' : 'pointer',
     ...customStyle
