@@ -1,0 +1,22 @@
+
+# clerk configuration (can include secrets)
+/.clerk/
+
+# dependencies & build
+/node_modules
+/.next/
+/out/
+*.tsbuildinfo
+
+# env & secrets (never commit)
+.env
+.env.local
+.env.*.local
+
+# debug / os
+.DS_Store
+*.log
+.npm
+
+# local scratch
+/.temp/

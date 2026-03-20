@@ -1,0 +1,48 @@
+// prisma/schema.prisma
+// Define your database models
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+// Example models
+
+model User {
+  id         Int        @id @default(autoincrement())
+  email      String     @unique
+  name       String?
+  clerkId    String?    @unique // Clerk user ID
+  posts      Post[]
+  analyses   Analysis[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Post {
+  id        Int     @id @default(autoincrement())
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User    @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+model Analysis {
+  id          Int       @id @default(autoincrement())
+  userId      Int?      // Null for anonymous users
+  user        User?     @relation(fields: [userId], references: [id])
+  clerkId     String?   // Clerk user ID for authenticated users (for easier querying)
+  anonymousId String?   // IP address or session ID for anonymous users
+  reportData  Json?     // Structured report JSON from OpenAI
+  createdAt   DateTime  @default(now())
+  
+  @@index([userId])
+  @@index([clerkId])
+  @@index([anonymousId])
+  @@index([createdAt])
+}
